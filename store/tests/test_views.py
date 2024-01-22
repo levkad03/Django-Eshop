@@ -1,16 +1,11 @@
-from unittest import skip
 from django.test import TestCase, Client, RequestFactory
 from django.contrib.auth.models import User
-from store.models import Product, Category
 from django.urls import reverse
 from django.http import HttpRequest
+
+from store.models import Product, Category
 from store.views import all_products
 
-
-# @skip("demo skip")
-# class TestSkip(TestCase):
-#     def test_skip_example(self):
-#         pass
 
 class TestViewResponses(TestCase):
     def setUp(self):
