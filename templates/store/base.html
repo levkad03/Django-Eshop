@@ -57,7 +57,15 @@
                            role="button"
                            href="{% url "basket:basket_summary" %}"
                            class="btn btn-outline-secondary">
-                            <div class="d-inline-flex">2</div>
+                            {% with total_qty=basket|length %}
+                                <div class="d-inline-flex" id="basket-qty">
+                                    {% if total_qty > 0 %}
+                                        {{ total_qty }}
+                                    {% else %}
+                                        0
+                                    {% endif %}
+                                </div>
+                            {% endwith %}
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  width="16"
                                  height="16"
