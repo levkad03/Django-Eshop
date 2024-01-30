@@ -7,7 +7,7 @@
             <h1 class="h5">Shopping basket</h1>
             {% for item in basket %}
                 {% with product=item.product %}
-                    <div class="row mb-4 border product-item">
+                    <div data-index="{{product.id}}" class="row mb-4 border product-item">
                         <div class="col-md-3 col-lg-2 order-md-first bg-light">
                             <img class="img-fluid mx-auto d-block"
                                  width="120px"
@@ -69,6 +69,7 @@
     <script>
         $(document).on('click', '.delete-button', function(e){
             e.preventDefault();
+            var prodid = $(this).data('index');
             $.ajax({
                 type: 'POST',
                 url: '{% url "basket:basket_delete" %}',
@@ -78,7 +79,9 @@
                     action: 'post'
                 },
                 success: function (json){
-                    console.log(json);
+                    console.log(prodid);
+                    $('.product-item[data-index="' + prodid + '"]').remove();
+                    
                 },
                 error: function (xhr, errmsg, err) {}
             });
