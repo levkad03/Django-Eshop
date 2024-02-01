@@ -1,8 +1,9 @@
-from django.shortcuts import render
-from .basket import Basket
-from django.shortcuts import get_object_or_404
-from store.models import Product
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, render
+
+from store.models import Product
+
+from .basket import Basket
 
 
 def basket_summary(request):
@@ -39,7 +40,7 @@ def basket_update(request):
     if request.POST.get('action') == 'post':
         product_id = int(request.POST.get('productid'))
         product_qty = int(request.POST.get('productqty'))
-        
+
         basket.update(product=product_id, qty=product_qty)
         basket_qty = basket.__len__()
         basket_total = basket.get_total_price()
