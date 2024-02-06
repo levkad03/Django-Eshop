@@ -41,7 +41,7 @@ class UserBase(AbstractBaseUser, PermissionsMixin):
     about = models.TextField(_("about"), max_length=500, blank=True)
 
     # Delivery fileds
-    # country = CountryField(blank=True)
+    country = models.CharField(max_length=200,  null=True, choices=CountryField().choices + [('', 'Select Country')])
     phone_number = models.CharField(max_length=15, blank=True)
     postcode = models.CharField(max_length=12, blank=True)
     address_line_1 = models.CharField(max_length=150, blank=True)
