@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # custom apps
     "store",
     "basket",
+    "account",
 ]
 
 MIDDLEWARE = [
@@ -134,3 +135,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Custom User Model
+AUTH_USER_MODEL = 'account.UserBase'
+LOGIN_REDIRECT_URL = '/account/dashboard'
+LOGIN_URL = '/account/login/'
