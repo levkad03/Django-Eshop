@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
+from django.http import HttpResponse
 
 from .forms import RegistrationForm
 from .token import account_activation_token
@@ -10,21 +11,19 @@ from .token import account_activation_token
 
 def account_register(request):
 
-    if request.user.is_authenticated:
-        return redirect("/")
+    # if request.user.is_authenticated:
+    #     return redirect('account:dashboard')
 
-    if request.method == "POST":
+    if request.method == 'POST':
         registerForm = RegistrationForm(request.POST)
-
         if registerForm.is_valid():
             user = registerForm.save(commit=False)
             user.email = registerForm.cleaned_data['email']
             user.set_password(registerForm.cleaned_data['password'])
             user.is_active = False
             user.save()
-            # setup email
             current_site = get_current_site(request)
-            subject = "Activate your Account"
+            subject = 'Activate your Account'
             message = render_to_string('account/registration/account_activation_email.html', {
                 'user': user,
                 'domain': current_site.domain,
@@ -32,7 +31,7 @@ def account_register(request):
                 'token': account_activation_token.make_token(user),
             })
             user.email_user(subject=subject, message=message)
-        else:
-            registerForm = RegistrationForm()
-
-        return render(request, 'account/registration/register.html', {'form': registerForm})
+            return HttpResponse('registered succesfully and activation sent')
+    else:
+        registerForm = RegistrationForm()
+    return render(request, 'account/registration/register.html', {'form': registerForm})
