@@ -64,12 +64,13 @@ def account_activate(request, uidb64, token):
 
 @login_required
 def edit_details(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         user_form = UserEditForm(instance=request.user, data=request.POST)
 
         if user_form.is_valid():
             user_form.save()
-        else:
-            user_form = UserEditForm(instance=request.user)
+    else:
+        user_form = UserEditForm(instance=request.user)
 
-    return render(request, 'account/user/edit_detail.html', {'user_form': user_form})
+    return render(request,
+                  'account/user/edit_details.html', {'user_form': user_form})
