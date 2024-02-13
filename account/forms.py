@@ -91,3 +91,23 @@ class UserEditForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['first_name'].required = True
         self.fields['email'].required = True
+
+
+class PwdResetForm(PasswordResetForm):
+
+    email = forms.EmailField(max_length=254, widget=forms.TextInput(
+        attrs={
+            'class': 'form-control mb-3',
+            'placeholder': 'Email',
+            'id': 'form-email'
+        }
+    ))
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        u = UserBase.objects.filter(email=email)
+
+        if not u:
+            raise forms.ValidationError('Unfortunately, we cannot find the email address')
+
+        return email
