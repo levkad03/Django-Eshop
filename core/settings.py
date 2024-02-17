@@ -28,7 +28,7 @@ SECRET_KEY = "django-insecure-%f_wlv@*075df&6=e5$j_=yc$rgi&ybxl%5)d51293ljkku-8(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['yourdomain.com', '127.0.0.1']
+ALLOWED_HOSTS = ['yourdomain.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -151,3 +151,4 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 load_dotenv()
 # Stripe keys
 STRIPE_SECRET_KEY = os.getenv("SECRET_KEY")
+STRIPE_ENDPOINT_SECRET = os.getenv("ENDPOINT_SECRET")
