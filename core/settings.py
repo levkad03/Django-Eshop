@@ -153,5 +153,6 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 load_dotenv()
 # Stripe keys
+os.environ.setdefault('STRIPE_PUBLISHABLE_KEY', 'pk_test_51Ok36zGN46pmt5AWmxaq5XDGZvjDorLrw5PLiFhoVK00N1mNKOLrtUsgXqZSaXn6tXZSEepRhN3MBaPDlRuLRI8x00eY9l9qsO')
 STRIPE_SECRET_KEY = os.getenv("SECRET_KEY")
 STRIPE_ENDPOINT_SECRET = os.getenv("ENDPOINT_SECRET")

@@ -1,4 +1,5 @@
 import json
+import os
 
 import stripe
 from django.conf import settings
@@ -28,7 +29,8 @@ def BasketView(request):
         metadata={'user_id': request.user.id}
     )
 
-    return render(request, "payment/home.html", {"client_secret": intent.client_secret})
+    return render(request, "payment/payment_form.html", {"client_secret": intent.client_secret,
+                                                         "STRIPE_PUBLISHABLE_KEY": os.environ.get('STRIPE_PUBLISHABLE_KEY')})
 
 
 @csrf_exempt
